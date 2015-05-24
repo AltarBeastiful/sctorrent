@@ -27,6 +27,31 @@ function showTorrentView() {
         page.removeChild(page.firstChild);
     }
 
+    //Construct search interface
+
+    //Search query input
+    var searchInput = document.createElement('input');
+    searchInput.id = 'torrent-search-query';
+    searchInput.inputType = 'search';
+
+    var form = document.createElement('form');
+    form.action = '';
+    form.addEventListener('submit', function (e) {
+        clearResults();
+        searchTorrents(searchQuery());
+        e.preventDefault();
+        return false;
+    });
+
+    //Hidden submit button
+    var hiddenSubmit = document.createElement('input');
+    hiddenSubmit.style.display = 'none';
+    hiddenSubmit.type = 'submit';
+
+    form.appendChild(hiddenSubmit);
+    form.appendChild(searchInput);
+    page.appendChild(form);
+
     // Find title and original title
     var originalMovieTitle = document.querySelector(".pvi-product-originaltitle");
     if (originalMovieTitle)
@@ -42,9 +67,12 @@ function showTorrentView() {
     }
 
     if(originalMovieTitle && useOriginalTitle)
-        searchTorrents(originalMovieTitle);
+        setSearchQuery(originalMovieTitle);
     else
-        searchTorrents(movieTitle);
+        setSearchQuery(movieTitle);
+
+    // Start the search
+    hiddenSubmit.click();
 }
 
 function searchTorrents(query) {
@@ -63,7 +91,8 @@ function searchTorrents(query) {
 
 function displayTorrents(torrents) {
     var table = document.createElement('TABLE');
-    table.border='1';
+    table.id = 'search-results-table';
+    table.border = 1;
 
     var tableBody = document.createElement('TBODY');
     table.appendChild(tableBody);
@@ -106,6 +135,21 @@ function appendCell(content, tableLine, align) {
     cell.appendChild(content);
     cell.align = align;
     tableLine.appendChild(cell);
+}
+
+function setSearchQuery(query) {
+    var searchInput = document.querySelector('#torrent-search-query');
+    searchInput.value = query;
+}
+
+function searchQuery() {
+    return document.querySelector('#torrent-search-query').value;
+}
+
+function clearResults() {
+    var table = document.getElementById('search-results-table');
+    if (table)
+        table.parentElement.removeChild(table);
 }
 
 function magnetLink(title, hash) {
