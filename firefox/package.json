@@ -1,0 +1,17 @@
+{
+  "title": "SC Torrent",
+  "name": "sctorrent",
+  "version": "0.0.1",
+  "description": "Add torrent result for SensCritique",
+  "main": "index.js",
+  "author": "Rémi Benoit",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "MIT",
+  "permissions": {
+    "cross-domain-content": [  "http://www.senscritique.com/"
+                              ,"https://kat.cr/"]
+  }
+}

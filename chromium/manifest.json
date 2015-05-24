@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+
+  "name": "SC Torrent",
+  "description": "Add torrent results in SensCritique",
+  "version": "1.0",
+
+  "content_scripts": [
+    {
+      "matches": ["http://www.senscritique.com/film/*"],
+      "js": ["sctorrent.js"]
+    }
+  ],
+
+  "permissions": [
+    "http://www.senscritique.com/",
+    "https://kat.cr/"
+  ]
+}
