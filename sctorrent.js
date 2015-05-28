@@ -85,7 +85,7 @@ function searchTorrents(query) {
             displayTorrents(response.list);
         }
     }
-    xhr.open('GET', 'https://kat.cr/json.php?q=' + query + '&field=seeders&order=desc&page=1&category=movies' , true);
+    xhr.open('GET', 'https://kat.cr/json.php?q=' + query + ' category:movies Is_safe:1&field=seeders&order=desc&page=1&category=movies' , true);
     xhr.send();
 }
 
